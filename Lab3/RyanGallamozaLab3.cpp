@@ -142,6 +142,8 @@ int *randArray(int *len, int *hi, int *low){
 	}
 
 	return arr;
+
+	delete [] arr;
 }
 
 void fillArray(int arr[], int len, int hi, int low){
@@ -161,6 +163,8 @@ int *randArrayV2(int *len, int *hi, int *low){
 	fillArray(arr, *len, *hi, *low);
 
 	return arr;
+
+	delete [] arr;
 }
 
 void printArray(int arr[], int size){
@@ -214,6 +218,8 @@ int *filterArray(int arr[], int size){
 	}
 
 	return newarr;
+
+	delete [] newarr;
 }
 
 void graphArray(int arr[], int size, int hi, int low){
