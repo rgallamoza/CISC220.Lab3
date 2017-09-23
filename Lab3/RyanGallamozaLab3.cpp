@@ -23,6 +23,10 @@ int *randArrayV2(int *len, int *hi, int *low);
 void fillArray(int arr[], int len, int hi, int low);
 void printArray(int arr[], int size);
 
+int hanningWindow(int arr[]); // window size set at 5 for problems 1.4,5,6
+int *filterArray(int arr[], int size);
+void graphArray(int arr[], int size, int hi, int low);
+
 int main(){
 	cout << "Problem 1.1" << endl;
 	cout << "Test 1:" << endl;
@@ -82,7 +86,46 @@ int main(){
 	cout << "Function used to print arrays in Problems 1.1 and 1.2" << endl;
 	cout << "*************************" << endl;
 
+	cout << "Problem 1.4" << endl;
+	cout << "Test 1:" << endl;
+	int hw1[5] = {1,2,3,4,5};
+	cout << hanningWindow(hw1) << endl; // Expected: 3
+	cout << "Test 2:" << endl;
+	int hw2[5] = {10,10,10,10,10};
+	cout << hanningWindow(hw2) << endl; // Expected: 10
+	cout << "Test 3:" << endl;
+	int hw3[5] = {3,8,2,5,1};
+	cout << hanningWindow(hw3) << endl; // Expected: 4
+	cout << "*************************" << endl;
 
+	cout << "Problem 1.5" << endl;
+	cout << "Test 1:" << endl;
+	int arri1[4] = {1,2,3,4};
+	int *arrf1;
+	arrf1 = filterArray(arri1,4);
+	printArray(arrf1,4); // Expected: 0,0,0,0
+	cout << "Test 2:" << endl;
+	int arri2[5] = {1,2,3,4,5};
+	int *arrf2;
+	arrf2 = filterArray(arri2,5);
+	printArray(arrf2,5); // Expected: 0,0,3,0,0
+	cout << "Test 3:" << endl;
+	int arri3[9] = {3,8,2,5,1,4,6,0,2};
+	int *arrf3;
+	arrf3 = filterArray(arri3,9);
+	printArray(arrf3,9); // Expected: 0,0,4,3,3,3,3,0,0
+	cout << "*************************" << endl;
+
+	cout << "Problem 1.6" << endl;
+	cout << "Test 1:" << endl;
+	int garray1[5] = {1,2,3,4,5};
+	graphArray(garray1,5,5,1); // Expected: Diagonal line
+	cout << "Test 2:" << endl;
+	int garray2[35] = {6,-2,-4,5,-3,-4,-3,-1,5,2,-2,0,-7,2,-3,-4,-3,-1,-5,-3,1,7,3,-7,-7,3,-8,1,-5,-4,-2,-5,-8,0,-4};
+	graphArray(garray2,35,7,-8); // Expected: Graph of unfiltered array from Lab pdf
+	cout << "Test 3:" << endl;
+	graphArray(filterArray(garray2,35),35,2,-4); //Expected: Graph of filtered array from Lab pdf
+	cout << "*************************" << endl;
 
 	return 0;
 }
@@ -128,5 +171,69 @@ void printArray(int arr[], int size){
 		else{
 			cout << arr[i] << ",";
 		}
+	}
+}
+
+int hanningWindow(int arr[]){
+	int result = 0;
+
+	for(int i=0;i<5;i++){
+		if(i==0||i==4){
+			result += arr[i];
+		}
+		else if(i==1||i==3){
+			result += arr[i]*2;
+		}
+		else{
+			result += arr[i]*3;
+		}
+	}
+
+	result /= 9;
+
+	return result;
+}
+
+int *filterArray(int arr[], int size){
+	int *newarr = new int[size];
+
+	if(size<5){
+		for(int i=0;i<size;i++){
+			newarr[i] = 0;
+		}
+	}
+	else{
+		for(int i=0;i<size;i++){
+			if((i>1)&&(i<size-2)){
+				newarr[i] = hanningWindow(&arr[i-2]);
+			}
+			else{
+				newarr[i] = 0;
+			}
+		}
+	}
+
+	return newarr;
+}
+
+void graphArray(int arr[], int size, int hi, int low){
+	for(int i=hi;i>=low;i--){
+		if(i>=0){
+			cout << " " << i << ":";
+		}
+		else{
+			cout << i << ":";
+		}
+
+		for(int j=0;j<size;j++){
+			if(arr[j]==i){
+				cout << "*";
+			}
+			else{
+				cout << " ";
+			}
+		}
+
+		cout << endl;
 	}
 }
