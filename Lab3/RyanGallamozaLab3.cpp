@@ -125,7 +125,6 @@ int main(){
 	graphArray(garray2,35,7,-8); // Expected: Graph of unfiltered array from Lab pdf
 	cout << "Test 3:" << endl;
 	graphArray(filterArray(garray2,35),35,2,-4); //Expected: Graph of filtered array from Lab pdf
-	cout << "*************************" << endl;
 
 	return 0;
 }
@@ -148,6 +147,7 @@ int *randArray(int *len, int *hi, int *low){
 
 void fillArray(int arr[], int len, int hi, int low){
 	arr[len-1] = rand() % (hi-low) + low;
+
 	if(len>1){
 		fillArray(arr,len-1,hi,low);
 	}
