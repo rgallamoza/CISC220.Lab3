@@ -19,13 +19,56 @@
 using namespace std;
 
 int *randArray(int *len, int *hi, int *low);
-int *randArrayV2(int *len, int *hi, int *low);
-void fillArray(int arr[], int len, int hi, int low);
-void printArray(int arr[], int size);
+/* Returns an array of integers with a length between 25 and 50 (excluding 50). The
+ * array will have a high value between 5 to 10 (excluding 10) and low value between
+ * -5 and -10 (excluding -10). Modifies given pointers to the randomized values.
+ * Parameters: *len: Pointer to an integer. Will be modified to the length of the array.
+ * 			   *hi: Pointer to an integer. Will be modified to the high value of the array.
+ * 			   *low: Pointer to an integer. Will be modified to the low value of the array.
+ */
 
-int hanningWindow(int arr[]); // window size set at 5 for problems 1.4,5,6
+int *randArrayV2(int *len, int *hi, int *low);
+/* Returns an array of integers with a length between 25 and 50 (excluding 50). The
+ * array will have a high value between 5 to 10 (excluding 10) and low value between
+ * -5 and -10 (excluding -10). Modifies given pointers to the randomized values.
+ * Parameters: *len: Pointer to an integer. Will be modified to the length of the array.
+ * 			   *hi: Pointer to an integer. Will be modified to the high value of the array.
+ * 			   *low: Pointer to an integer. Will be modified to the low value of the array.
+ */
+
+void fillArray(int arr[], int len, int hi, int low); // Helper function for randArrayV2
+/* Fills a given array of integers with values based on the given high and low value
+ * Parameters: arr[]: Array of integers to be filled
+ * 			   len: Length of the given array
+ * 			   hi: High value to be used
+ * 			   low: Low value to be used
+ */
+
+void printArray(int arr[], int size);
+/* Prints the values of a given array, comma separated.
+ * Parameters: arr[]: Array of integers to be printed
+ * 			   size: Length of the given array
+ */
+
+int hanningWindow(int arr[]); // Note: window size set at 5 for problems 1.4,5,6
+/* Weights and averages the first 5 values of a given array.
+ * Parameters: arr[]: An array of integers to be evaluated
+ */
+
 int *filterArray(int arr[], int size);
+/* Filters the values of a given array using the hanning window
+ * Parameters: arr[]: Array of integers to be filtered
+ * 			   size: Length of the given array
+ */
+
 void graphArray(int arr[], int size, int hi, int low);
+/* Prints a graph of a given array of integers. Size of axes based on given size,
+ * hi, and low values.
+ * Parameters: arr[]: Array of integers to be graphed
+ * 			   size: Length of the given array
+ * 			   hi: High value to be used
+ * 			   low: Low value to be used
+ */
 
 int main(){
 	cout << "Problem 1.1" << endl;
@@ -118,8 +161,9 @@ int main(){
 
 	cout << "Problem 1.6" << endl;
 	cout << "Test 1:" << endl;
-	int garray1[5] = {1,2,3,4,5};
-	graphArray(garray1,5,5,1); // Expected: Diagonal line
+	int len7, hi7, low7, *arr7;
+	arr7 = randArrayV2(&len7,&hi7,&low7);
+	graphArray(filterArray(arr7,len7),len7,hi7,low7); // Expected: 'Filtered' graph
 	cout << "Test 2:" << endl;
 	int garray2[35] = {6,-2,-4,5,-3,-4,-3,-1,5,2,-2,0,-7,2,-3,-4,-3,-1,-5,-3,1,7,3,-7,-7,3,-8,1,-5,-4,-2,-5,-8,0,-4};
 	graphArray(garray2,35,7,-8); // Expected: Graph of unfiltered array from Lab pdf
@@ -225,10 +269,10 @@ int *filterArray(int arr[], int size){
 void graphArray(int arr[], int size, int hi, int low){
 	for(int i=hi;i>=low;i--){
 		if(i>=0){
-			cout << " " << i << ":";
+			cout << "  " << i << ":";
 		}
 		else{
-			cout << i << ":";
+			cout << " " << i << ":";
 		}
 
 		for(int j=0;j<size;j++){
