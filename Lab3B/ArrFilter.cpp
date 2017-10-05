@@ -29,10 +29,6 @@ void ArrFilter::randArray(){
 	}
 
 	array = temp;
-
-	delete [] temp;
-
-
 }
 
 void ArrFilter::fillArray(int arr[], int len, int h, int l){
@@ -53,8 +49,6 @@ void ArrFilter::randArrayV2(){
 	fillArray(temp, size, hi, low);
 
 	array = temp;
-
-	delete [] temp;
 }
 
 void ArrFilter::printArray(){
