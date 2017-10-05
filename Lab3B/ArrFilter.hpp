@@ -10,6 +10,12 @@
 
 class ArrFilter{
 	private:
+		int size;		// Length of the array.
+		int hi;			// Maximum value of the array.
+		int low;		// Minimum value of the array.
+		int *array;		// The array.
+		int *farray;	// Filtered array.
+
 		int hanningWindow(int arr[]);
 		/*	Helper function used in filterArray() to weight and average the first 5 values of a given array.
 		 * 	Parameters:	arr[]: An array of integers to be evaluated.
@@ -25,12 +31,6 @@ class ArrFilter{
 		 */
 
 	public:
-		int size;		// Length of the array.
-		int hi;			// Maximum value of the array.
-		int low;		// Minimum value of the array.
-		int *array;		// The array.
-		int *farray;	// Filtered array.
-
 		ArrFilter();
 		/*	Initializes an ArrFilter with NULL values for array and farray, and 0 for size, hi, and low.
 		 */
@@ -67,6 +67,27 @@ class ArrFilter{
 		void graphFArray();
 		/* 	Prints a graph of farray. Size of axes based on size, hi, and low values.
 		 */
+
+		int getSize();
+		/*	Returns size value in the ArrFilter
+		 */
+
+		int getHigh();
+		/*	Returns size value in the ArrFilter
+		 */
+
+		int getLow();
+		/*	Returns size value in the ArrFilter
+		 */
+
+		int *getArray();
+		/*	Returns size value in the ArrFilter
+		 */
+
+		int *getFArray();
+		/*	Returns size value in the ArrFilter
+		 */
+
 };
 
 #endif /* ARRFILTER_HPP_ */

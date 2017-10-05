@@ -159,3 +159,23 @@ void ArrFilter::graphFArray(){
 		std::cout << std::endl;
 	}
 }
+
+int ArrFilter::getSize(){
+	return size;
+}
+
+int ArrFilter::getHigh(){
+	return hi;
+}
+
+int ArrFilter::getLow(){
+	return low;
+}
+
+int* ArrFilter::getArray(){
+	return array;
+}
+
+int* ArrFilter::getFArray(){
+	return farray;
+}
